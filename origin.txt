@@ -1,0 +1,88 @@
+Uri: https://tronplanets.net/
+File Name: c:\Downloaded Web Sites\tronplanets.net\index.htm
+Content Type: text/html
+
+Uri: https://tronplanets.net/intro.jpg
+File Name: c:\Downloaded Web Sites\tronplanets.net\intro.jpg
+Content Type: image/jpeg
+
+Uri: https://tronplanets.net/favicon.ico
+File Name: c:\Downloaded Web Sites\tronplanets.net\favicon.ico
+Content Type: image/vnd.microsoft.icon
+
+Uri: https://tronplanets.net/bootstrap.min.css
+File Name: c:\Downloaded Web Sites\tronplanets.net\bootstrap.min.css
+Content Type: text/css
+
+Uri: https://tronplanets.net/?lang=en
+File Name: c:\Downloaded Web Sites\tronplanets.net\index-1.htm
+Content Type: text/html
+
+Uri: https://tronplanets.net/?lang=ru
+File Name: c:\Downloaded Web Sites\tronplanets.net\index-2.htm
+Content Type: text/html
+
+Uri: https://tronplanets.net/?lang=cn
+File Name: c:\Downloaded Web Sites\tronplanets.net\index-3.htm
+Content Type: text/html
+
+Uri: https://tronplanets.net/bootstrap.min.js
+File Name: c:\Downloaded Web Sites\tronplanets.net\bootstrap.min.js
+Content Type: application/javascript
+
+Uri: https://tronplanets.net/tronweb.js
+File Name: c:\Downloaded Web Sites\tronplanets.net\tronweb.js
+Content Type: application/javascript
+
+Uri: https://tronplanets.net/abi.js
+File Name: c:\Downloaded Web Sites\tronplanets.net\abi.js
+Content Type: application/javascript
+
+Uri: https://tronplanets.net/en.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\en.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/ru.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\ru.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/cn.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\cn.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/planets/saturn.gif
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\saturn.gif
+Content Type: image/gif
+
+Uri: https://tronplanets.net/planets/comet.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\comet.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/planets/asteroid3.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\asteroid3.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/planets/asteroid1.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\asteroid1.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/planets/asteroid2.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\asteroid2.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/planets/small_planet.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\small_planet.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/planets/saturn.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\saturn.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/planets/venus.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\venus.png
+Content Type: image/png
+
+Uri: https://tronplanets.net/planets/purple_planet.png
+File Name: c:\Downloaded Web Sites\tronplanets.net\planets\purple_planet.png
+Content Type: image/png
+

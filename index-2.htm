@@ -1,0 +1,1267 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="ru">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" href="favicon.ico">
+<title>Tron Planets</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.26.1/ramda.min.js" integrity="sha256-43x9r7YRdZpZqTjDT5E0Vfrxn1ajIZLyYWtfAXsargA=" crossorigin="anonymous"></script>
+<script src="bootstrap.min.js"></script>
+<script src="tronweb.js"></script>
+<script src="abi.js"></script>
+<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Hanalei&display=swap" rel="stylesheet">
+<style>
+body {
+  background-color: rgb(0, 0, 25);
+  background: url(intro.jpg) 50% 50% fixed;
+}
+.menu-right-top {
+  padding: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  color: #bbbb99;
+  z-index: 100;
+  position: relative;
+}
+.menu-right-top > a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  color: #ddddbb;
+}
+.menu-right-top > a:hover {
+  color: #ffffdd;
+  text-shadow: 3px 3px 7px #ffffdd, 0 0 5em rgb(255, 255, 170);
+  text-decoration: none;
+}
+.menu-left-top {
+  padding: 10px;
+}
+.num-group {
+  margin: 25px auto;
+  text-align: center;
+}
+.num {
+  padding: 25px 15px;
+  border-radius: 5px;
+  background-color: rgba(170, 115, 65, 0.3);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 24px;
+  color: rgb(255, 200, 150);
+  text-shadow: 0px 0px 7px #ffffdd, 0 0 5em rgb(255, 200, 150);
+}
+.font-less {
+  font-size: 12px;
+}
+
+.card {
+  box-shadow: 0 0 10px rgba(100, 100, 100, 0.5);
+  background-color: rgba(170, 115, 65, 0.2);
+  color: #dddddd;
+}
+.card-header {
+  background-color: rgba(170, 115, 65, 0.7);
+}
+.card-body: {
+  background-color: rgba(170, 115, 65, 0.7);
+}
+.card:hover {
+  box-shadow: 0 0 10px rgba(255, 200, 150, 0.7);
+}
+.card-building {
+  margin-top: 5px;
+}
+.card-building > .card-body {
+  padding: 10px;
+}
+.card-building > .card-header {
+  padding: 10px;
+  font-size: 14px;
+  overflow: hidden;
+  height: 35px;
+}
+.btn-success {
+  background-color: #c4c462 !important;
+  border-color: #c4c462;
+  background-image: linear-gradient(#cccc78, #c4c462 60%, #bebe53);
+  background-repeat: no-repeat;
+}
+.btn-success:hover {
+  background-image: linear-gradient(#939337, #9e9e3b 40%, #a6a63e) !important;
+  background-repeat: no-repeat;
+}
+.mono {
+  font-family: 'Share Tech Mono', monospace;
+}
+.modal-header {
+  background-color: rgb(100, 100, 120);
+}
+.modal-body {
+  background-color: rgb(100, 100, 120);
+}
+.modal-footer {
+  background-color: rgb(100, 100, 120);
+}
+.office-title {
+  color: rgb(200, 180, 200);
+}
+
+.color-change1 {
+  animation: color-change1 2s infinite;
+  font-weight: bold;
+}
+
+.color-change2 {
+  animation: color-change2 2s infinite;
+  font-weight: bold;
+}
+
+.color-change3 {
+  animation: color-change3 2s infinite;
+  font-weight: bold;
+}
+
+.privateData {
+  display: none;
+}
+
+@keyframes shadow {
+from {box-shadow: 0 0 10px rgba(255, 255, 200, 0.7);}
+50% {box-shadow: 0 0 30px rgba(255, 255, 200, 0.7);}
+to {box-shadow: 0 0 10px rgba(255, 255, 200, 0.7);}
+}
+
+@keyframes color-change1 {
+  0% { color: rgb(170, 115, 65); }
+  20% { color: rgb(170, 115, 65); }
+  40% { color: rgb(150, 150, 150); }
+  60% { color: rgb(150, 150, 150); }
+  80% { color: rgb(150, 150, 150); }
+  100% { color: rgb(150, 150, 150); }
+}
+
+@keyframes color-change2 {
+  0% { color: rgb(150, 150, 150); }
+  20% { color: rgb(150, 150, 150); }
+  40% { color: rgb(170, 115, 65); }
+  60% { color: rgb(170, 115, 65); }
+  80% { color: rgb(150, 150, 150); }
+  100% { color: rgb(150, 150, 150); }
+}
+
+@keyframes color-change3 {
+  0% { color: rgb(150, 150, 150); }
+  20% { color: rgb(150, 150, 150); }
+  40% { color: rgb(150, 150, 150); }
+  60% { color: rgb(150, 150, 150); }
+  80% { color: rgb(170, 115, 65); }
+  100% { color: rgb(170, 115, 65); }
+}
+
+@keyframes comet {
+  from { opacity: 1.0; }
+  50% { opacity: 0.7; }
+  to { opacity: 1.0; }
+}
+
+.comet {
+  animation: comet 2s infinite linear;
+  position: relative;
+  z-index: -100;
+}
+
+.image-info {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 200, 0.7);
+}
+.building-price {
+  width: 80px;
+  background-color: black;
+  font-size: 12px;
+  color: #aaaaff;
+  margin: auto;
+  padding-top: 2px;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.cosmo-button {
+  margin: auto;
+  width: 250px;
+  background-color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(170, 115, 65, 0.9);
+  padding: 5px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  position: relative;
+}
+.cosmo-button:hover {
+  box-shadow: 0 0 50px rgba(170, 115, 65, 0.9);
+}
+</style>
+</head>
+<body>
+<div style="position:fixed;z-index:-1;left:0;top:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.5)">&nbsp;</div>
+
+<div class="modal fade" id="tronlinkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Информация</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="tronlinkModalContent"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="faqModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">FAQ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                  <h3>Безопасно ли вкладывать свои средства?</h3>
+          <p class="text-justify">
+            Проект базируется на смарт-контракте на блокчейне TRON, поэтому он полностью децентрализован. Все действия каждого игрока видны всем остальным игрокам. Исходный код смарт-контракта находится в свободном доступе, любой желающий может с ним ознакомиться. Проект всегда будет работать точно так, как описано в смарт-контракте. Ни создатели проекта, ни любые другие люди не могут изменить логику работы контракта.
+          </p>
+          <h3>Как взаимодействовать с игрой?</h3>
+          <p class="text-justify">
+            Взаимодействие с игрой осуществляется транзакциями в сети TRON, поэтому достаточно браузерного расширения TronLink или TronPay или мобильного приложения Math Wallet.
+          </p>
+          <h3>Как приступить к заработку?</h3>
+          <p class="text-justify">
+            В этой игре прибыль можно получать тремя способами: покупая планеты, привлекая рефералов и замораживая токены для получения ежедневных дивидендов. Для увеличения дохода с планет можно делать апгрейд.
+          </p>
+          <h3>Как начисляется доход?</h3>
+          <p class="text-justify">
+            Доход начисляется каждые 3 секунды и сразу же доступен для вывода.
+          </p>
+          <h3>Как получить дивиденды?</h3>
+          <p class="text-justify">
+            Дивиденды будут выплачиваться автоматически КАЖДЫЙ ДЕНЬ.
+          </p>
+          <h3>Остались вопросы?</h3>
+          <p class="text-justify">
+            Вы можете задать их в нашей группе в Telegram, где Вам с радостью ответят создатели проекта или его участники.
+          </p>
+              </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="float-right menu-right-top">
+  <a target="_blank" href="https://tronscan.org/#/contract/TCo4bkoxtkUXazK2DYk4UdheXcvGFiCaH3/code">Tronscan</a>&nbsp;|&nbsp;
+  <a target="_blank" href="https://tronscan.org/#/token/1002568">Токен TGT</a>&nbsp;|&nbsp;
+  <a target="_blank" href="https://tronwatch.market/trade/1002568-TRX">Торговать TGT</a>&nbsp;|&nbsp;
+  <a href="#" data-toggle="modal" data-target="#faqModal">FAQ</a>&nbsp;|&nbsp;
+  <a href="#" onclick="location.href='tg://resolve?domain=tronplanets'">Telegram</a>
+  <a href="index-1.htm?lang=en"><img src="en.png"></a>
+  <a href="index-2.htm?lang=ru"><img src="ru.png"></a>
+  <a href="index-3.htm?lang=cn"><img src="cn.png"></a>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="text-center">
+        <div style="margin-top:10px">
+          <div style="width:150px;margin:auto;background-color:black;color:white;font-size:10px;text-transform:uppercase;box-shadow: 0 -2px 5px rgba(170, 115, 65, 0.7);position:relative">Выплата дивидендов через</div>
+          
+          <div style="background-color:black;width:220px;margin:auto;border-radius:20px;box-shadow: 0 0 10px rgba(170, 115, 65, 0.7);position:relative">
+            <div class="mono" style="font-size:24px;color:#333300">00 00:00:00</div>
+            <div class="divsCounter mono" style="font-size:24px;color:rgb(255, 200, 150);text-shadow: 0px 0px 7px #ffffdd, 0 0 5em rgb(255, 200, 150);z-index:1;margin-top:-35px">-- --:--:--</div>
+          </div>
+          
+          <div style="width:150px;margin:auto;background-color:black;color:white;font-size:16px;text-transform:uppercase;box-shadow: 0 2px 5px rgba(170, 115, 65, 0.7);position:relative"><span class="divPool">...</span> TRX</div>
+        </div>
+      </div>
+      <div style="margin-top:20px;font-size:16px;font-weight:bold">
+                    Первая в мире экономическая игра с <span style="text-shadow:3px 3px 7px black, 0 0 1em rgb(255, 170, 170);font-size:20px;color:rgb(255, 170, 170)">ЕЖЕДНЕВНЫМИ</span> дивидендами!
+              </div>
+      
+              <div class="text-justify" style="font-size:12px">Добро пожаловать в экономическую игру, в которой можно зарабатывать TRX, просто покупая планеты! Вы будете дополнительно получать токены TGT за каждую покупку в игре! Токены будут использоваться для получения дивидендов КАЖДЫЙ ДЕНЬ, а также в последующих проектах. У нас также есть другая приятная функция - призовой фонд, который получает игрок, который был последним инвестором в течение двух часов. Если игрок получает призовой фонд, фонд начинает копиться заново.</div>
+            
+      <div class="clearfix"></div>
+      
+      <div style="text-transform:uppercase;text-shadow:0px 0px 7px rgb(170, 115, 65), 0 0 5em rgb(170, 115, 65);font-size:20px;color:rgb(255, 200, 150);text-align:center">Инвестировано TRX</div>
+      <div class="num-group">
+        <span class="num" id="num6">&nbsp;</span>
+        <span class="num" id="num5">&nbsp;</span>
+        <span class="num" id="num4">&nbsp;</span>
+        <span class="num" id="num3">&nbsp;</span>
+        <span class="num" id="num2">&nbsp;</span>
+        <span class="num" id="num1">&nbsp;</span>
+        <span class="num" id="num0">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="card">
+        <div class="card-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <h3>Мой офис</h3>
+                <div><small class="text-warning">Помните, что прибыль можно выводить каждые 3 секунды!</small></div>
+                <div class="privateData">
+                  Мой уровень: <span class="upgrades"></span> (+<span class="upgrades"></span>% / месяц)
+                </div>
+                <div class="privateData">
+                  <span class="btn btn-warning btn-sm upgrade" style="cursor:pointer">Улучшить</span>
+                </div>
+                <div>
+                  <span class="btn btn-success btn-sm" style="cursor:pointer" id="getProfit">Вывести доход</span>
+                  <span class="btn btn-info btn-sm" style="cursor:pointer" id="getPrizeFund">Получить приз. фонд</span>
+                </div>
+                
+                <div>
+                  <i class="fas fa-hand-point-right"></i>
+                  <small class="office-title">Призовой фонд</small>
+                </div>
+                <div style="font-size:12px">
+                  Чтобы получить призовой фонд, нужно быть последним инвестором в течение как минимум 2400 блоков (2 часа), после чего нужно кликнуть <b>Получить приз. фонд</b>.                </div>
+                
+                <div>
+                  <i class="fas fa-hand-point-right"></i>
+                  <small class="office-title">Рефералы</small>
+                </div>
+                <small>Приглашайте людей в Ваш офис TGT (5%):</small>
+                <div class="text-danger noref">Вам нужно зарегистрироваться или купить хотя бы одну планету, чтобы привлекать рефералов</div>
+                <div class="btn btn-success register noref" style="cursor:pointer">РЕГИСТРАЦИЯ</div>
+                <input class="withref form-control" id="node" readonly="" style="display:none" onclick="this.select()">
+                
+                <div>
+                  <i class="fas fa-hand-point-right"></i>
+                  <small class="office-title">Токены TGT</small>
+                </div>
+                <div class="privateData">
+                  У Вас <div class="float-right"><span class="tokenAmount mono">0</span> <span class="mono">TGT</span></div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="privateData">
+                  Заморожено Вами <div class="float-right"><span class="frozenAmount mono">0</span> <span class="mono">TGT</span></div>
+                  <div class="clearfix"></div>
+                </div>
+                <div>
+                  Заморожено всего <div class="float-right"><span class="frozenTotalAmount mono">0</span> <span class="mono">TGT</span></div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="privateData">
+                  Ваши дивиденды <div class="float-right"><span class="divsAmount mono">0</span> <span class="mono">TRX&nbsp;&nbsp;&nbsp;</span></div>
+                  <div class="clearfix"></div>
+                </div>
+                                <div class="clearfix"></div>
+                <div>
+                  <input class="form-control form-control-sm" id="freezeAmount" placeholder="Количество для заморозки">
+                </div>
+                <div>
+                  <span class="btn btn-success btn-sm" style="cursor:pointer" id="freeze">Заморозить</span>
+                  <span class="btn btn-info btn-sm" style="cursor:pointer" id="unfreeze">Разморозить все</span>
+                </div>
+                <div>
+                  <small class="text-warning">Заморозьте Ваши токены, чтобы получать дивиденды КАЖДЫЙ ДЕНЬ</small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h3>Статистика</h3>
+                
+                <div class="float-left">Всего инвесторов:</div>
+                <div class="float-right"><span class="mono totalInvestors">0</span></div>
+                <div class="clearfix"></div>
+                
+                <div class="float-left">Инвестировано TRX:</div>
+                <div class="float-right"><span class="mono" id="trxInvested">0</span></div>
+                <div class="clearfix"></div>
+                
+                <div class="float-left">TRX в призовом фонде:</div>
+                <div class="float-right"><span class="mono" id="prizeFund">0</span></div>
+                <div class="clearfix"></div>
+                
+                <div class="float-left">Пул дивидендов:</div>
+                <div class="float-right"><span class="mono divPool">0</span></div>
+                <div class="clearfix"></div>
+                
+                                
+                <div class="gameRun">
+                  <div class="float-left">Последний инвестор:</div>
+                  <div class="float-right"><span class="mono" id="lastInvestor"></span></div>
+                  <div class="clearfix"></div>
+                  
+                  <div class="float-left">Последняя инвестиция:</div>
+                  <div class="float-right"><span class="mono" id="lastInvestmentAt"></span></div>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <h4 style="margin-top:25px">Мои рефералы</h4>
+                <div class="float-left text-info">Адрес</div>
+                <div class="float-right text-info">Моя прибыль</div>
+                <div class="clearfix"></div>
+                <div id="myrefs"></div>
+                
+                <h4 style="margin-top:25px">Мои дивиденды</h4>
+                <div id="mydivs"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center" style="margin-top:15px;margin-bottom:5px;font-size:12px;color:#ffffdd">При покупке планеты или апгрейде своего офиса Вы автоматически получаете накопленные проценты на кошелек</div>
+
+<div class="container">
+      <div class="row">
+              <div class="d-none d-md-block col-md-4 text-center">
+          <div style="width:50px;height:110%;background-color:rgba(100, 100, 0, 0.5);margin:auto;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:100px;height:100px;border-radius:50px;background-color:rgba(150, 150, 50, 0.9);background:radial-gradient(at left top, rgba(175, 175, 175, 0.9), rgba(150, 150, 50, 0.9));margin:auto;margin-left:-25px;font-size:48px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 20px rgba(150, 150, 50, 0.9);color:rgb(200, 200, 255)">1</div>
+          </div>
+        </div>
+            <div class="col-xs-12 col-md-8">
+        <div class="card card-building" style="background-color:rgb(90, 90, 50)">
+          <div class="card-header" style="background-color:rgb(90, 90, 50)">
+            Комета            <div class="float-right">
+              <img src="planets\saturn.gif" style="margin-top:-10px;height:25px;transform:rotate(15deg)">
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <img class="img-fluid image-info" src="planets\comet.png" style="width:30%;float:left;margin-right:10px;cursor:pointer;" data-name="comet" data-title="Комета" data-price="50" data-percent="95">
+              
+              <div class="text-justify">
+                                  В этой игре объект <b class="buildingTitle">Комета</b> доступен для покупки. Стоимость составляет <span class="buildingPrice">50</span> TRX. Каждый месяц эта планета приносит прибыль <span class="buildingPercent">47.5 - 50</span> TRX, однако, прибыль можно выводить хоть каждые 3 секунды. За покупку этого корабля игрок получит дополнительно <span class="buildingPrice2">5000</span> токенов TGT.
+                              </div>
+            </div>
+            <div class="clearfix" style="margin-bottom:5px"></div>
+            <div class="float-left d-sm-none d-block">
+              <div style="width:28px;height:28px;border-radius:5px;background-color:#c4c462;font-size:16px;color:white;text-align:center;padding-top:2px"><span class="mono comet-builds">0</span></div>
+            </div>
+            <div class="float-left d-none d-sm-block">
+              <div style="width:45px;height:45px;border-radius:5px;background-color:#c4c462;font-size:24px;color:white;text-align:center;padding-top:2px"><span class="mono comet-builds">0</span></div>
+            </div>
+            <div class="float-right">
+              <span class="float-left btn btn-success btn-sm buyBuilding d-sm-none d-block" style="cursor:pointer" data-buy="50"><i class="fas fa-shopping-cart"></i> 50 TRX</span>
+              <span class="float-left btn btn-success btn-lg buyBuilding d-none d-sm-block" style="cursor:pointer" data-buy="50"><i class="fas fa-shopping-cart"></i> 50 TRX</span>
+              
+              <div class="float-right d-sm-none d-block" style="font-size:16px;margin-left:5px;margin-top:5px">95+<span class="upgrades">0</span>% / месяц</div>
+              <div class="float-right d-none d-sm-block" style="font-size:24px;margin-left:5px;margin-top:5px">95+<span class="upgrades">0</span>% / месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+      <div class="row">
+            <div class="col-xs-12 col-md-8">
+        <div class="card card-building" style="background-color:rgb(100, 100, 58)">
+          <div class="card-header" style="background-color:rgb(100, 100, 58)">
+            Маленький астероид            <div class="float-right">
+              <img src="planets\saturn.gif" style="margin-top:-10px;height:25px;transform:rotate(15deg)">
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <img class="img-fluid image-info" src="planets\asteroid3.png" style="width:30%;float:left;margin-right:10px;cursor:pointer;" data-name="asteroid3" data-title="Маленький астероид" data-price="100" data-percent="96">
+              
+              <div class="text-justify">
+                                  В этой игре объект <b class="buildingTitle">Маленький астероид</b> доступен для покупки. Стоимость составляет <span class="buildingPrice">100</span> TRX. Каждый месяц эта планета приносит прибыль <span class="buildingPercent">96 - 101</span> TRX, однако, прибыль можно выводить хоть каждые 3 секунды. За покупку этого корабля игрок получит дополнительно <span class="buildingPrice2">10000</span> токенов TGT.
+                              </div>
+            </div>
+            <div class="clearfix" style="margin-bottom:5px"></div>
+            <div class="float-left d-sm-none d-block">
+              <div style="width:28px;height:28px;border-radius:5px;background-color:#c4c462;font-size:16px;color:white;text-align:center;padding-top:2px"><span class="mono asteroid3-builds">0</span></div>
+            </div>
+            <div class="float-left d-none d-sm-block">
+              <div style="width:45px;height:45px;border-radius:5px;background-color:#c4c462;font-size:24px;color:white;text-align:center;padding-top:2px"><span class="mono asteroid3-builds">0</span></div>
+            </div>
+            <div class="float-right">
+              <span class="float-left btn btn-success btn-sm buyBuilding d-sm-none d-block" style="cursor:pointer" data-buy="100"><i class="fas fa-shopping-cart"></i> 100 TRX</span>
+              <span class="float-left btn btn-success btn-lg buyBuilding d-none d-sm-block" style="cursor:pointer" data-buy="100"><i class="fas fa-shopping-cart"></i> 100 TRX</span>
+              
+              <div class="float-right d-sm-none d-block" style="font-size:16px;margin-left:5px;margin-top:5px">96+<span class="upgrades">0</span>% / месяц</div>
+              <div class="float-right d-none d-sm-block" style="font-size:24px;margin-left:5px;margin-top:5px">96+<span class="upgrades">0</span>% / месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+              <div class="d-none d-md-block col-md-4 text-center">
+          <div style="width:50px;height:110%;background-color:rgba(100, 100, 0, 0.5);margin:auto;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:100px;height:100px;border-radius:50px;background-color:rgba(150, 150, 50, 0.9);background:radial-gradient(at left top, rgba(175, 175, 175, 0.9), rgba(150, 150, 50, 0.9));margin:auto;margin-left:-25px;font-size:48px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 20px rgba(150, 150, 50, 0.9);color:rgb(200, 200, 255)">2</div>
+          </div>
+        </div>
+          </div>
+      <div class="row">
+              <div class="d-none d-md-block col-md-4 text-center">
+          <div style="width:50px;height:110%;background-color:rgba(100, 100, 0, 0.5);margin:auto;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:100px;height:100px;border-radius:50px;background-color:rgba(150, 150, 50, 0.9);background:radial-gradient(at left top, rgba(175, 175, 175, 0.9), rgba(150, 150, 50, 0.9));margin:auto;margin-left:-25px;font-size:48px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 20px rgba(150, 150, 50, 0.9);color:rgb(200, 200, 255)">3</div>
+          </div>
+        </div>
+            <div class="col-xs-12 col-md-8">
+        <div class="card card-building" style="background-color:rgb(110, 110, 66)">
+          <div class="card-header" style="background-color:rgb(110, 110, 66)">
+            Средний астероид            <div class="float-right">
+              <img src="planets\saturn.gif" style="margin-top:-10px;height:25px;transform:rotate(15deg)">
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <img class="img-fluid image-info" src="planets\asteroid1.png" style="width:30%;float:left;margin-right:10px;cursor:pointer;" data-name="asteroid1" data-title="Средний астероид" data-price="200" data-percent="97">
+              
+              <div class="text-justify">
+                                  В этой игре объект <b class="buildingTitle">Средний астероид</b> доступен для покупки. Стоимость составляет <span class="buildingPrice">200</span> TRX. Каждый месяц эта планета приносит прибыль <span class="buildingPercent">194 - 204</span> TRX, однако, прибыль можно выводить хоть каждые 3 секунды. За покупку этого корабля игрок получит дополнительно <span class="buildingPrice2">20000</span> токенов TGT.
+                              </div>
+            </div>
+            <div class="clearfix" style="margin-bottom:5px"></div>
+            <div class="float-left d-sm-none d-block">
+              <div style="width:28px;height:28px;border-radius:5px;background-color:#c4c462;font-size:16px;color:white;text-align:center;padding-top:2px"><span class="mono asteroid1-builds">0</span></div>
+            </div>
+            <div class="float-left d-none d-sm-block">
+              <div style="width:45px;height:45px;border-radius:5px;background-color:#c4c462;font-size:24px;color:white;text-align:center;padding-top:2px"><span class="mono asteroid1-builds">0</span></div>
+            </div>
+            <div class="float-right">
+              <span class="float-left btn btn-success btn-sm buyBuilding d-sm-none d-block" style="cursor:pointer" data-buy="200"><i class="fas fa-shopping-cart"></i> 200 TRX</span>
+              <span class="float-left btn btn-success btn-lg buyBuilding d-none d-sm-block" style="cursor:pointer" data-buy="200"><i class="fas fa-shopping-cart"></i> 200 TRX</span>
+              
+              <div class="float-right d-sm-none d-block" style="font-size:16px;margin-left:5px;margin-top:5px">97+<span class="upgrades">0</span>% / месяц</div>
+              <div class="float-right d-none d-sm-block" style="font-size:24px;margin-left:5px;margin-top:5px">97+<span class="upgrades">0</span>% / месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+      <div class="row">
+            <div class="col-xs-12 col-md-8">
+        <div class="card card-building" style="background-color:rgb(120, 120, 74)">
+          <div class="card-header" style="background-color:rgb(120, 120, 74)">
+            Большой астероид            <div class="float-right">
+              <img src="planets\saturn.gif" style="margin-top:-10px;height:25px;transform:rotate(15deg)">
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <img class="img-fluid image-info" src="planets\asteroid2.png" style="width:30%;float:left;margin-right:10px;cursor:pointer;" data-name="asteroid2" data-title="Большой астероид" data-price="500" data-percent="98">
+              
+              <div class="text-justify">
+                                  В этой игре объект <b class="buildingTitle">Большой астероид</b> доступен для покупки. Стоимость составляет <span class="buildingPrice">500</span> TRX. Каждый месяц эта планета приносит прибыль <span class="buildingPercent">490 - 515</span> TRX, однако, прибыль можно выводить хоть каждые 3 секунды. За покупку этого корабля игрок получит дополнительно <span class="buildingPrice2">50000</span> токенов TGT.
+                              </div>
+            </div>
+            <div class="clearfix" style="margin-bottom:5px"></div>
+            <div class="float-left d-sm-none d-block">
+              <div style="width:28px;height:28px;border-radius:5px;background-color:#c4c462;font-size:16px;color:white;text-align:center;padding-top:2px"><span class="mono asteroid2-builds">0</span></div>
+            </div>
+            <div class="float-left d-none d-sm-block">
+              <div style="width:45px;height:45px;border-radius:5px;background-color:#c4c462;font-size:24px;color:white;text-align:center;padding-top:2px"><span class="mono asteroid2-builds">0</span></div>
+            </div>
+            <div class="float-right">
+              <span class="float-left btn btn-success btn-sm buyBuilding d-sm-none d-block" style="cursor:pointer" data-buy="500"><i class="fas fa-shopping-cart"></i> 500 TRX</span>
+              <span class="float-left btn btn-success btn-lg buyBuilding d-none d-sm-block" style="cursor:pointer" data-buy="500"><i class="fas fa-shopping-cart"></i> 500 TRX</span>
+              
+              <div class="float-right d-sm-none d-block" style="font-size:16px;margin-left:5px;margin-top:5px">98+<span class="upgrades">0</span>% / месяц</div>
+              <div class="float-right d-none d-sm-block" style="font-size:24px;margin-left:5px;margin-top:5px">98+<span class="upgrades">0</span>% / месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+              <div class="d-none d-md-block col-md-4 text-center">
+          <div style="width:50px;height:110%;background-color:rgba(100, 100, 0, 0.5);margin:auto;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:100px;height:100px;border-radius:50px;background-color:rgba(150, 150, 50, 0.9);background:radial-gradient(at left top, rgba(175, 175, 175, 0.9), rgba(150, 150, 50, 0.9));margin:auto;margin-left:-25px;font-size:48px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 20px rgba(150, 150, 50, 0.9);color:rgb(200, 200, 255)">4</div>
+          </div>
+        </div>
+          </div>
+      <div class="row">
+              <div class="d-none d-md-block col-md-4 text-center">
+          <div style="width:50px;height:110%;background-color:rgba(100, 100, 0, 0.5);margin:auto;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:100px;height:100px;border-radius:50px;background-color:rgba(150, 150, 50, 0.9);background:radial-gradient(at left top, rgba(175, 175, 175, 0.9), rgba(150, 150, 50, 0.9));margin:auto;margin-left:-25px;font-size:48px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 20px rgba(150, 150, 50, 0.9);color:rgb(200, 200, 255)">5</div>
+          </div>
+        </div>
+            <div class="col-xs-12 col-md-8">
+        <div class="card card-building" style="background-color:rgb(130, 130, 82)">
+          <div class="card-header" style="background-color:rgb(130, 130, 82)">
+            Маленькая планета            <div class="float-right">
+              <img src="planets\saturn.gif" style="margin-top:-10px;height:25px;transform:rotate(15deg)">
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <img class="img-fluid image-info" src="planets\small_planet.png" style="width:30%;float:left;margin-right:10px;cursor:pointer;" data-name="small_planet" data-title="Маленькая планета" data-price="1000" data-percent="99">
+              
+              <div class="text-justify">
+                                  В этой игре объект <b class="buildingTitle">Маленькая планета</b> доступен для покупки. Стоимость составляет <span class="buildingPrice">1000</span> TRX. Каждый месяц эта планета приносит прибыль <span class="buildingPercent">990 - 1040</span> TRX, однако, прибыль можно выводить хоть каждые 3 секунды. За покупку этого корабля игрок получит дополнительно <span class="buildingPrice2">100000</span> токенов TGT.
+                              </div>
+            </div>
+            <div class="clearfix" style="margin-bottom:5px"></div>
+            <div class="float-left d-sm-none d-block">
+              <div style="width:28px;height:28px;border-radius:5px;background-color:#c4c462;font-size:16px;color:white;text-align:center;padding-top:2px"><span class="mono small_planet-builds">0</span></div>
+            </div>
+            <div class="float-left d-none d-sm-block">
+              <div style="width:45px;height:45px;border-radius:5px;background-color:#c4c462;font-size:24px;color:white;text-align:center;padding-top:2px"><span class="mono small_planet-builds">0</span></div>
+            </div>
+            <div class="float-right">
+              <span class="float-left btn btn-success btn-sm buyBuilding d-sm-none d-block" style="cursor:pointer" data-buy="1000"><i class="fas fa-shopping-cart"></i> 1000 TRX</span>
+              <span class="float-left btn btn-success btn-lg buyBuilding d-none d-sm-block" style="cursor:pointer" data-buy="1000"><i class="fas fa-shopping-cart"></i> 1000 TRX</span>
+              
+              <div class="float-right d-sm-none d-block" style="font-size:16px;margin-left:5px;margin-top:5px">99+<span class="upgrades">0</span>% / месяц</div>
+              <div class="float-right d-none d-sm-block" style="font-size:24px;margin-left:5px;margin-top:5px">99+<span class="upgrades">0</span>% / месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+      <div class="row">
+            <div class="col-xs-12 col-md-8">
+        <div class="card card-building" style="background-color:rgb(140, 140, 90)">
+          <div class="card-header" style="background-color:rgb(140, 140, 90)">
+            Планета с кольцами            <div class="float-right">
+              <img src="planets\saturn.gif" style="margin-top:-10px;height:25px;transform:rotate(15deg)">
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <img class="img-fluid image-info" src="planets\saturn.png" style="width:30%;float:left;margin-right:10px;cursor:pointer;" data-name="saturn" data-title="Планета с кольцами" data-price="5000" data-percent="100">
+              
+              <div class="text-justify">
+                                  В этой игре объект <b class="buildingTitle">Планета с кольцами</b> доступен для покупки. Стоимость составляет <span class="buildingPrice">5000</span> TRX. Каждый месяц эта планета приносит прибыль <span class="buildingPercent">5000 - 5250</span> TRX, однако, прибыль можно выводить хоть каждые 3 секунды. За покупку этого корабля игрок получит дополнительно <span class="buildingPrice2">500000</span> токенов TGT.
+                              </div>
+            </div>
+            <div class="clearfix" style="margin-bottom:5px"></div>
+            <div class="float-left d-sm-none d-block">
+              <div style="width:28px;height:28px;border-radius:5px;background-color:#c4c462;font-size:16px;color:white;text-align:center;padding-top:2px"><span class="mono saturn-builds">0</span></div>
+            </div>
+            <div class="float-left d-none d-sm-block">
+              <div style="width:45px;height:45px;border-radius:5px;background-color:#c4c462;font-size:24px;color:white;text-align:center;padding-top:2px"><span class="mono saturn-builds">0</span></div>
+            </div>
+            <div class="float-right">
+              <span class="float-left btn btn-success btn-sm buyBuilding d-sm-none d-block" style="cursor:pointer" data-buy="5000"><i class="fas fa-shopping-cart"></i> 5000 TRX</span>
+              <span class="float-left btn btn-success btn-lg buyBuilding d-none d-sm-block" style="cursor:pointer" data-buy="5000"><i class="fas fa-shopping-cart"></i> 5000 TRX</span>
+              
+              <div class="float-right d-sm-none d-block" style="font-size:16px;margin-left:5px;margin-top:5px">100+<span class="upgrades">0</span>% / месяц</div>
+              <div class="float-right d-none d-sm-block" style="font-size:24px;margin-left:5px;margin-top:5px">100+<span class="upgrades">0</span>% / месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+              <div class="d-none d-md-block col-md-4 text-center">
+          <div style="width:50px;height:110%;background-color:rgba(100, 100, 0, 0.5);margin:auto;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:100px;height:100px;border-radius:50px;background-color:rgba(150, 150, 50, 0.9);background:radial-gradient(at left top, rgba(175, 175, 175, 0.9), rgba(150, 150, 50, 0.9));margin:auto;margin-left:-25px;font-size:48px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 20px rgba(150, 150, 50, 0.9);color:rgb(200, 200, 255)">6</div>
+          </div>
+        </div>
+          </div>
+      <div class="row">
+              <div class="d-none d-md-block col-md-4 text-center">
+          <div style="width:50px;height:110%;background-color:rgba(100, 100, 0, 0.5);margin:auto;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:100px;height:100px;border-radius:50px;background-color:rgba(150, 150, 50, 0.9);background:radial-gradient(at left top, rgba(175, 175, 175, 0.9), rgba(150, 150, 50, 0.9));margin:auto;margin-left:-25px;font-size:48px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 20px rgba(150, 150, 50, 0.9);color:rgb(200, 200, 255)">7</div>
+          </div>
+        </div>
+            <div class="col-xs-12 col-md-8">
+        <div class="card card-building" style="background-color:rgb(150, 150, 98)">
+          <div class="card-header" style="background-color:rgb(150, 150, 98)">
+            Горячая планета            <div class="float-right">
+              <img src="planets\saturn.gif" style="margin-top:-10px;height:25px;transform:rotate(15deg)">
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <img class="img-fluid image-info" src="planets\venus.png" style="width:30%;float:left;margin-right:10px;cursor:pointer;" data-name="venus" data-title="Горячая планета" data-price="10000" data-percent="101">
+              
+              <div class="text-justify">
+                                  В этой игре объект <b class="buildingTitle">Горячая планета</b> доступен для покупки. Стоимость составляет <span class="buildingPrice">10000</span> TRX. Каждый месяц эта планета приносит прибыль <span class="buildingPercent">10100 - 10600</span> TRX, однако, прибыль можно выводить хоть каждые 3 секунды. За покупку этого корабля игрок получит дополнительно <span class="buildingPrice2">1000000</span> токенов TGT.
+                              </div>
+            </div>
+            <div class="clearfix" style="margin-bottom:5px"></div>
+            <div class="float-left d-sm-none d-block">
+              <div style="width:28px;height:28px;border-radius:5px;background-color:#c4c462;font-size:16px;color:white;text-align:center;padding-top:2px"><span class="mono venus-builds">0</span></div>
+            </div>
+            <div class="float-left d-none d-sm-block">
+              <div style="width:45px;height:45px;border-radius:5px;background-color:#c4c462;font-size:24px;color:white;text-align:center;padding-top:2px"><span class="mono venus-builds">0</span></div>
+            </div>
+            <div class="float-right">
+              <span class="float-left btn btn-success btn-sm buyBuilding d-sm-none d-block" style="cursor:pointer" data-buy="10000"><i class="fas fa-shopping-cart"></i> 10000 TRX</span>
+              <span class="float-left btn btn-success btn-lg buyBuilding d-none d-sm-block" style="cursor:pointer" data-buy="10000"><i class="fas fa-shopping-cart"></i> 10000 TRX</span>
+              
+              <div class="float-right d-sm-none d-block" style="font-size:16px;margin-left:5px;margin-top:5px">101+<span class="upgrades">0</span>% / месяц</div>
+              <div class="float-right d-none d-sm-block" style="font-size:24px;margin-left:5px;margin-top:5px">101+<span class="upgrades">0</span>% / месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+      <div class="row">
+            <div class="col-xs-12 col-md-8">
+        <div class="card card-building" style="background-color:rgba(245, 161, 255, 0.5)">
+          <div class="card-header" style="background-color:rgba(245, 161, 255, 0.5)">
+            Фиолетовая планета            <div class="float-right">
+              <img src="planets\saturn.gif" style="margin-top:-10px;height:25px;transform:rotate(15deg)">
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <img class="img-fluid image-info" src="planets\purple_planet.png" style="width:30%;float:left;margin-right:10px;cursor:pointer;box-shadow:0 0 10px rgba(245, 161, 255, 0.5)" data-name="purple_planet" data-title="Фиолетовая планета" data-price="100000" data-percent="102">
+              
+              <div class="text-justify">
+                                  В этой игре объект <b class="buildingTitle">Фиолетовая планета</b> доступен для покупки. Стоимость составляет <span class="buildingPrice">100000</span> TRX. Каждый месяц эта планета приносит прибыль <span class="buildingPercent">102000 - 107000</span> TRX, однако, прибыль можно выводить хоть каждые 3 секунды. За покупку этого корабля игрок получит дополнительно <span class="buildingPrice2">10000000</span> токенов TGT.
+                              </div>
+            </div>
+            <div class="clearfix" style="margin-bottom:5px"></div>
+            <div class="float-left d-sm-none d-block">
+              <div style="width:28px;height:28px;border-radius:5px;background-color:#c4c462;font-size:16px;color:white;text-align:center;padding-top:2px"><span class="mono purple_planet-builds">0</span></div>
+            </div>
+            <div class="float-left d-none d-sm-block">
+              <div style="width:45px;height:45px;border-radius:5px;background-color:#c4c462;font-size:24px;color:white;text-align:center;padding-top:2px"><span class="mono purple_planet-builds">0</span></div>
+            </div>
+            <div class="float-right">
+              <span class="float-left btn btn-success btn-sm buyBuilding d-sm-none d-block" style="cursor:pointer" data-buy="100000"><i class="fas fa-shopping-cart"></i> 100000 TRX</span>
+              <span class="float-left btn btn-success btn-lg buyBuilding d-none d-sm-block" style="cursor:pointer" data-buy="100000"><i class="fas fa-shopping-cart"></i> 100000 TRX</span>
+              
+              <div class="float-right d-sm-none d-block" style="font-size:16px;margin-left:5px;margin-top:5px">102+<span class="upgrades">0</span>% / месяц</div>
+              <div class="float-right d-none d-sm-block" style="font-size:24px;margin-left:5px;margin-top:5px">102+<span class="upgrades">0</span>% / месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+              <div class="d-none d-md-block col-md-4 text-center">
+          <div style="width:50px;height:110%;background-color:rgba(245, 161, 255, 0.5);margin:auto;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:100px;height:100px;border-radius:50px;background-color:rgba(150, 150, 50, 0.9);background:radial-gradient(at left top, rgba(175, 175, 175, 0.9), rgba(245, 161, 255, 0.5));margin:auto;margin-left:-25px;font-size:48px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 20px rgba(245, 161, 255, 0.5);color:rgb(200, 200, 255)">8</div>
+          </div>
+        </div>
+          </div>
+  </div>
+
+<div class="text-center text-danger" style="margin-top:5px;font-size:12px">Выплаты игрокам идут только до тех пор, пока есть средства на балансе контракта. Никто не гарантирует Вам прибыли в этой игре.</div>
+
+<div style="height:100px">&nbsp;</div>
+
+<div style="position:fixed;bottom:0;width:100%;padding:5px;background-color:rgba(170, 115, 65, 0.3);text-align:center">
+  <div>
+    <div style="margin-left:-100px;margin-top:10px">
+      <div style="background-color:black;width:220px;margin:auto;border-radius:20px;box-shadow: 0 0 10px rgba(170, 115, 65, 0.7)">
+        <div class="mono" style="font-size:24px;color:#333300">00 00:00:00</div>
+        <div class="gameStartIn mono" style="font-size:24px;color:rgb(255, 200, 150);text-shadow: 0px 0px 7px #ffffdd, 0 0 5em rgb(255, 200, 150);z-index:1;margin-top:-35px">-- --:--:--</div>
+      </div>
+      <div class="gameWait" style="display:none;width:150px;margin:auto;background-color:black;color:white;font-size:10px;text-transform:uppercase;box-shadow: 0 2px 5px rgba(170, 115, 65, 0.7)">Игра начнется через</div>
+      <div class="gameRun" style="width:150px;margin:auto;background-color:black;color:white;font-size:10px;text-transform:uppercase;box-shadow: 0 2px 5px rgba(170, 115, 65, 0.7)">Время от старта</div>
+    </div>
+    
+    <div style="margin-left:240px;margin-top:-52px">
+      <div style="background-color:black;width:80px;margin:auto;border-radius:20px;box-shadow: 0 0 10px rgba(170, 115, 65, 0.7)">
+        <div class="mono totalInvestors" style="font-size:24px;color:rgb(255, 200, 150);text-shadow: 0px 0px 7px #ffffdd, 0 0 5em rgb(255, 200, 150);z-index:1;margin-top:-35px">---</div>
+      </div>
+      <div style="width:50px;margin:auto;background-color:black;color:white;font-size:10px;text-transform:uppercase;box-shadow: 0 2px 5px rgba(170, 115, 65, 0.7)">Игроков</div>
+    </div>
+  </div>
+  
+  <div>
+          <small class="gameWait text-danger">Игра еще не началась, но уже можно привлекать рефералов!</small>
+      </div>
+  
+  <div class="clearfix"></div>
+</div>
+
+<div id="scrolltop" class="d-sm-none" style="position:fixed;bottom:120px;right:10px;width:50px;height:50px;border-radius:50px;background-color:#dddddd;text-align:center;font-size:24px;padding-top:5px;display:none" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+  <i class="fas fa-chevron-up"></i>
+</div>
+
+<script>
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 0) {
+    $('#scrolltop').fadeIn();
+  } else {
+    $('#scrolltop').fadeOut();
+  }
+});
+
+if ($(window).scrollTop() > 0) {
+  $('#scrolltop').fadeIn();
+}
+
+var FEE_LIMIT = 1e7;
+
+var myAddress;
+var blockNumber = 0;
+var lastInvestedAt = 0;
+var prevLastInvestedAtBlock;
+var gameStarted = false;
+var gameStartIn = 0;
+var prevGameStartIn;
+var totalInvested = 0;
+var totalFrozenAmount = 0;
+var contractAddress = 'TCo4bkoxtkUXazK2DYk4UdheXcvGFiCaH3';
+var totalPaid = 4232500017;
+var twxRate = 0.033;
+var divsCounter = -26652;
+var tronWebExternal = new TronWeb({
+  fullHost: 'https://api.trongrid.io',
+  privateKey: 'a5bacbca1ecfa6d6bd981da5bfc507eba084187a9e389399daa51c46bc5f999f',
+});
+var contractExt = tronWebExternal.contract(abi, contractAddress);
+var myDivsLoaded = false;
+var upgradeLevels = [ 50000, 100000, 300000, 1000000, 10000000 ];
+var nextUpgradePrice = 0;
+
+window.setInterval(function() {
+  tronWebExternal.trx.getCurrentBlock(function(err, res) {
+    blockNumber = res.block_header.raw_data.number;
+    
+    if (blockNumber === prevGameStartIn) {
+      return
+    }
+    
+    prevGameStartIn = blockNumber;
+    
+    var diff = (blockNumber - 14415804) * 3 >> 0;
+    if (diff > 0) {
+      $('.gameRun').show();
+      $('.gameWait').hide();
+      gameStarted = true;
+    } else {
+      $('.gameRun').hide();
+      $('.gameWait').show();
+      gameStarted = false;
+    }
+    
+    gameStartIn = Math.abs(diff);
+  });
+  
+  contractExt.totalInvestors().call().then(function(res) {
+    $('.totalInvestors').html(res.toString());
+  });
+  
+  contractExt.totalInvested().call().then(function(res) {
+    totalInvested = res.toNumber();
+    var totalString = tronWebExternal.fromSun(res.toString());
+    $('#trxInvested').html(totalString);
+    
+    if (totalInvested) {
+      for (var i = 0; i < 7; i++) {
+        $('#num' + i).html(totalString[totalString.length - i - 1] || '&nbsp;');
+      }
+    } else {
+      for (var i = 0; i < 7; i++) {
+        $('#num' + i).html('0');
+      }
+    }
+    
+    $('.divPool').html(tronWebExternal.fromSun(totalInvested / 40 - totalPaid) >> 1);
+  });
+  
+  contractExt.prizeFund().call().then(function(res) {
+    $('#prizeFund').html(tronWebExternal.fromSun(res.toString()) / 2);
+  });
+  
+  contractExt.lastInvestor().call().then(function(res) {
+    res = tronWebExternal.address.fromHex(res);
+    $('#lastInvestor').html(res === myAddress ? '<span class="text-info">YOU</span>' : res.slice(0, 8) + '...');
+  });
+  
+  contractExt.lastInvestedAt().call().then(function(res) {
+    if (res.toNumber() === prevLastInvestedAtBlock) {
+      return
+    }
+    
+    prevLastInvestedAtBlock = res.toNumber();
+    
+    lastInvestedAt = (blockNumber - res.toNumber()) * 3;
+    if (lastInvestedAt < 0) {
+      lastInvestedAt = 0;
+    }
+  });
+  
+  contractExt.totalFrozen().call().then(function(res) {
+    totalFrozenAmount = res.toNumber();
+    $('.frozenTotalAmount').html((totalFrozenAmount / 1000000).toFixed(2));
+  });
+  
+  if (window.tronWeb && window.tronWeb.defaultAddress && window.tronWeb.defaultAddress.base58) {
+    myAddress = window.tronWeb.defaultAddress.base58;
+    
+    if (!myDivsLoaded) {
+      myDivsLoaded = true;
+      
+      $.get('/?divs=' + myAddress, function(res) {
+        res = JSON.parse(res);
+        $('#mydivs').html(res.map(function(r) { return '<div class="float-left">' + r.date + ' <a target="_blank" href="https://tronscan.org/#/transaction/' + r.hash + '">🔗</a></div><div class="float-right mono">' + r.amount + ' ' + r.token + '</div><div class="clearfix"></div>'; }).join(''));
+      })
+      
+      $.get('/?refs=' + myAddress, function(res) {
+        res = JSON.parse(res);
+        $('#myrefs').html(res.map(function(r) { return '<div class="float-left">' + r.user.slice(0, 8) + '... <a target="_blank" href="https://tronscan.org/#/address/' + r.user + '">🔗</a></div><div class="float-right mono">' + (r.invested / 20) + ' TRX</div><div class="clearfix"></div>'; }).join(''));
+      })
+    }
+    
+    $('#node').val('http://tgtplanet.net/?node=' + myAddress);
+    
+    $('.privateData').show();
+    
+          contractExt.objects(myAddress, 50000000).call().then(function(res) {
+        $('.comet-builds').html(res.toString());
+      });
+          contractExt.objects(myAddress, 100000000).call().then(function(res) {
+        $('.asteroid3-builds').html(res.toString());
+      });
+          contractExt.objects(myAddress, 200000000).call().then(function(res) {
+        $('.asteroid1-builds').html(res.toString());
+      });
+          contractExt.objects(myAddress, 500000000).call().then(function(res) {
+        $('.asteroid2-builds').html(res.toString());
+      });
+          contractExt.objects(myAddress, 1000000000).call().then(function(res) {
+        $('.small_planet-builds').html(res.toString());
+      });
+          contractExt.objects(myAddress, 5000000000).call().then(function(res) {
+        $('.saturn-builds').html(res.toString());
+      });
+          contractExt.objects(myAddress, 10000000000).call().then(function(res) {
+        $('.venus-builds').html(res.toString());
+      });
+          contractExt.objects(myAddress, 100000000000).call().then(function(res) {
+        $('.purple_planet-builds').html(res.toString());
+      });
+        
+    contractExt.getAllProfitAmount(myAddress).call().then(function(res) {
+      $('#getProfit').html('Вывести доход ' + (res.toString() === '0' ? '' : (res.toString() / 1000000).toFixed(6) + ' TRX'));
+      if (res.toString() === '0') {
+        $('#getProfit').addClass('disabled');
+      } else {
+        $('#getProfit').removeClass('disabled');
+      }
+    });
+    
+    contractExt.allowGetPrizeFund(myAddress).call().then(function(res) {
+      if (res) {
+        $('#getPrizeFund').removeClass('disabled');
+      } else {
+        $('#getPrizeFund').addClass('disabled');
+      }
+    });
+    
+    contractExt.registered(myAddress).call().then(function(res) {
+      if (res) {
+        $('.noref').hide();
+        $('.withref').show();
+      } else {
+        $('.noref').show();
+        $('.withref').hide();
+      }
+    });
+    
+    contractExt.frozen(myAddress).call().then(function(res) {
+      $('.frozenAmount').html((res.toNumber() / 1000000).toFixed(2));
+      if (totalFrozenAmount > 0) {
+        $('.divsAmount').html((res.toNumber() * (totalInvested / 40 - totalPaid) / totalFrozenAmount / 1000000 / 2).toFixed(4));
+        // $('.divsAmountTWX').html((res.toNumber() * (totalInvested / 40 - totalPaid) / totalFrozenAmount / 1000000 / twxRate).toFixed(4));
+      }
+    });
+    
+    contractExt.upgrades(myAddress).call().then(function(res) {
+      if (!upgradeLevels[res.toNumber()]) {
+        $('.upgrade').hide();
+        $('.upgrades').html(res.toString());
+        nextUpgradePrice = 0;
+      } else {
+        $('.upgrade').show();
+        $('.upgrade').html('Улучшить (' + upgradeLevels[res.toNumber()] + ' TGT)');
+        $('.upgrades').html(res.toString());
+        nextUpgradePrice = upgradeLevels[res.toNumber()];
+      }
+    });
+    
+    tronWeb.trx.getUnconfirmedAccount(myAddress)
+      .then(function(res) {
+        var xio10Asset = res.assetV2 && R.find(R.propEq('key', '1002568'))(res.assetV2);
+        $('.tokenAmount').html(xio10Asset && (xio10Asset.value / 1000000).toFixed(2) || '0.00');
+      });
+  } else {
+    $('.privateData').hide();
+  }
+}, 1000);
+
+$('.buyBuilding').click(function() {
+  if (!gameStarted) {
+    $('#tronlinkModalContent').html('The game has not started yet! However, you can already invite referrals to the game!');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb.defaultAddress.base58) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  
+  var contract = window.tronWeb.contract(abi, contractAddress);
+  
+  contract.buy('TCo4bkoxtkUXazK2DYk4UdheXcvGFiCaH3').send({
+    shouldPollResponse: false,
+    callValue: $(this).data('buy') * 1000000,
+    feeLimit: FEE_LIMIT
+  })
+    .then(function() {
+      
+    })
+    .catch(function() {
+      alert('Not enough funds');
+    });
+});
+
+$('#getProfit').click(function() {
+  if (!gameStarted) {
+    $('#tronlinkModalContent').html('The game has not started yet! However, you can already invite referrals to the game!');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb.defaultAddress.base58) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  
+  if ($(this).hasClass('disabled')) {
+    return;
+  }
+  
+  var contract = window.tronWeb.contract(abi, contractAddress);
+  
+  contract.getProfit().send({
+    shouldPollResponse: false,
+    callValue: 0,
+    feeLimit: FEE_LIMIT
+  })
+    .then(function() {
+      
+    });
+});
+
+$('.upgrade').click(function() {
+  if (nextUpgradePrice) {
+    var contract = window.tronWeb.contract(abi, contractAddress);
+    
+    contract.upgrade('TCo4bkoxtkUXazK2DYk4UdheXcvGFiCaH3').send({
+      shouldPollResponse: false,
+      tokenValue: nextUpgradePrice * 1000000,
+      tokenId: 1002568,
+      feeLimit: FEE_LIMIT
+    })
+      .then(function() {
+        
+      })
+      .catch(function(e) {
+        alert(e.message);
+      });
+  }
+});
+
+$('#getPrizeFund').click(function() {
+  if (!gameStarted) {
+    $('#tronlinkModalContent').html('The game has not started yet! However, you can already invite referrals to the game!');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb.defaultAddress.base58) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  
+  if ($(this).hasClass('disabled')) {
+    return;
+  }
+  
+  var contract = window.tronWeb.contract(abi, contractAddress);
+  
+  contract.getPrizeFund().send({
+    shouldPollResponse: false,
+    callValue: 0,
+    feeLimit: FEE_LIMIT
+  })
+    .then(function() {
+      
+    });
+});
+
+$('.register').click(function() {
+  if (!window.tronWeb) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb.defaultAddress.base58) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  
+  if ($(this).hasClass('disabled')) {
+    return;
+  }
+  
+  var contract = window.tronWeb.contract(abi, contractAddress);
+  
+  contract.register('TCo4bkoxtkUXazK2DYk4UdheXcvGFiCaH3').send({
+    shouldPollResponse: false,
+    callValue: 0,
+    feeLimit: FEE_LIMIT
+  })
+    .then(function() {
+      
+    });
+});
+
+$('#freeze').click(function() {
+  if (!window.tronWeb) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb.defaultAddress.base58) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  
+  if ($(this).hasClass('disabled')) {
+    return;
+  }
+  
+  var contract = window.tronWeb.contract(abi, contractAddress);
+  
+  contract.freeze('TCo4bkoxtkUXazK2DYk4UdheXcvGFiCaH3').send({
+    shouldPollResponse: false,
+    tokenValue: ($('#freezeAmount').val() * 1000000).toFixed(0),
+    tokenId: 1002568,
+    feeLimit: FEE_LIMIT
+  })
+    .then(function() {
+      
+    });
+});
+
+$('#unfreeze').click(function() {
+  if (!window.tronWeb) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  if (!window.tronWeb.defaultAddress.base58) {
+    $('#tronlinkModalContent').html('Please, install TronLink / TronPay and authorize.');
+    $('#tronlinkModal').modal();
+    return;
+  }
+  
+  if ($(this).hasClass('disabled')) {
+    return;
+  }
+  
+  var contract = window.tronWeb.contract(abi, contractAddress);
+  
+  contract.unfreeze().send({
+    shouldPollResponse: false,
+    callValue: 0,
+    feeLimit: FEE_LIMIT
+  })
+    .then(function() {
+      
+    });
+});
+
+window.setInterval(function() {
+  var diff = Date.now() / 1000 - 1561486273 >> 0;
+  var dd = diff / 86400 >> 0;
+  var hh = (diff - dd * 86400) / 3600 >> 0;
+  var mm = (diff - dd * 86400 - hh * 3600) / 60 >> 0;
+  var ss = diff - dd * 86400 - hh * 3600 - mm * 60;
+  
+  dd = dd < 10 ? '0' + dd : dd;
+  hh = hh < 10 ? '0' + hh : hh;
+  mm = mm < 10 ? '0' + mm : mm;
+  ss = ss < 10 ? '0' + ss : ss;
+  
+  $('#timeFromStart').html(dd + ' ' + hh + ':' + mm + ':' + ss);
+  
+  var dd = lastInvestedAt / 86400 >> 0;
+  var hh = (lastInvestedAt - dd * 86400) / 3600 >> 0;
+  var mm = (lastInvestedAt - dd * 86400 - hh * 3600) / 60 >> 0;
+  var ss = lastInvestedAt - dd * 86400 - hh * 3600 - mm * 60;
+  
+  dd = dd < 10 ? '0' + dd : dd;
+  hh = hh < 10 ? '0' + hh : hh;
+  mm = mm < 10 ? '0' + mm : mm;
+  ss = ss < 10 ? '0' + ss : ss;
+  
+  $('#lastInvestmentAt').html(dd + ' ' + hh + ':' + mm + ':' + ss);
+  
+  lastInvestedAt++;
+  
+  var dd = gameStartIn / 86400 >> 0;
+  var hh = (gameStartIn - dd * 86400) / 3600 >> 0;
+  var mm = (gameStartIn - dd * 86400 - hh * 3600) / 60 >> 0;
+  var ss = gameStartIn - dd * 86400 - hh * 3600 - mm * 60;
+  
+  dd = dd < 10 ? '0' + dd : dd;
+  hh = hh < 10 ? '0' + hh : hh;
+  mm = mm < 10 ? '0' + mm : mm;
+  ss = ss < 10 ? '0' + ss : ss;
+  
+  $('.gameStartIn').html(dd + ' ' + hh + ':' + mm + ':' + ss);
+  
+  gameStartIn += gameStarted ? 1 : -1;
+  if (gameStartIn < 0) {
+    gameStartIn = 0;
+  }
+  
+  divsCounter--;
+  if (divsCounter < 0) {
+    divsCounter += 86400;
+  }
+  
+  if (gameStarted) {
+    var dd = divsCounter / 86400 >> 0;
+    var hh = (divsCounter - dd * 86400) / 3600 >> 0;
+    var mm = (divsCounter - dd * 86400 - hh * 3600) / 60 >> 0;
+    var ss = divsCounter - dd * 86400 - hh * 3600 - mm * 60;
+    
+    dd = dd < 10 ? '0' + dd : dd;
+    hh = hh < 10 ? '0' + hh : hh;
+    mm = mm < 10 ? '0' + mm : mm;
+    ss = ss < 10 ? '0' + ss : ss;
+    
+    $('.divsCounter').html(dd + ' ' + hh + ':' + mm + ':' + ss);
+  } else {
+    $('.divsCounter').html('-- --:--:--');
+  }
+}, 1000);
+</script>
+</body>
+</html>
